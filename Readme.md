@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Надежда Стрельникова](https://up.htmlacademy.ru/javascript/27/user/2110921).
-* Наставник: `Неизвестно`.
+* Наставник: [Михаил Кислый](https://htmlacademy.ru/profile/smart-grizzly).
 
 ---
 
