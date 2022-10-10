@@ -1,10 +1,6 @@
 const PHOTOS_NUMBER = 25;
 const AVATAR_NUMBER = 6;
 
-const PHOTO_ID = Array.from({length: PHOTOS_NUMBER}, (_, i) => i + 1);
-const URL_PHOTO = Array.from({length: PHOTOS_NUMBER}, (_, i) => `photos/${i + 1}.jpg`);
-
-
 const NAMES = [
   'Иван',
   'Мария',
@@ -40,37 +36,76 @@ const getRandomPositiveInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
   const upper = Math.floor(Math.max(a, b));
   const result = Math.random() * (upper - lower + 1) + lower;
+
   return Math.floor(result);
 };
+
 
 const AVATAR = Array.from({length: AVATAR_NUMBER}, () => `img/avatar-${getRandomPositiveInteger(1, 6)}.svg`);
 
 const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0, elements.length - 1)];
 
-function getId (number) {
-  return Array (number).fill (0).map((_, i) => i + 1);
+
+function createRandomIdFromRangeGenerator (min, max) {
+  const previousValues = [];
+
+  return function () {
+    let currentValue = getRandomPositiveInteger(min, max);
+    if (previousValues.length >= (max - min + 1)) {
+      return null;
+    }
+    while (previousValues.includes(currentValue)) {
+      currentValue = getRandomPositiveInteger(min, max);
+    }
+
+    previousValues.push(currentValue);
+    return currentValue;
+  };
 }
 
-const COMMENT_ID = getId(200);
+function createRandomUrlFromRangeGenerator (min, max) {
+  const previousValues = [];
+
+  return function () {
+    let currentValue = getRandomPositiveInteger(min, max);
+    if (previousValues.length >= (max - min + 1)) {
+      return null;
+    }
+    while (previousValues.includes(currentValue)) {
+      currentValue = getRandomPositiveInteger(min, max);
+    }
+
+    previousValues.push(currentValue);
+    return `photos/${currentValue}.jpg`;
+  };
+}
+const getPhotoId = createRandomIdFromRangeGenerator(1, 25);
+const getCommentId = createRandomIdFromRangeGenerator(1, 200);
+const getUrl = createRandomUrlFromRangeGenerator(1,25);
+
+function rangeLikes(start, end) {
+  return Array(end - start + 1).fill().map((_, idx) => start + idx);
+}
+
+const LIKES = rangeLikes(15, 200);
 
 const getRandomComment = () => ({
-  id: getRandomArrayElement(COMMENT_ID),
+  id: getCommentId(),
   avatar: getRandomArrayElement(AVATAR),
   message: getRandomArrayElement(MESSAGES),
   name: getRandomArrayElement(NAMES)
 });
 
-const createCard = (i) => ({
-  id: PHOTO_ID[i],
-  url: URL_PHOTO[i],
+const createCard = () => ({
+  id: getPhotoId(),
+  url: getUrl(),
   description: getRandomArrayElement(DESCRIPTIONS),
-  likes: getRandomPositiveInteger(15,200),
+  likes: getRandomArrayElement(LIKES),
   comments: getRandomComment ()
 });
 
-const photoCollection = Array.from({length: PHOTOS_NUMBER}, (_, i) => createCard(i)
-);
-console.log(photoCollection);
+const photoCollection = Array.from({length: PHOTOS_NUMBER}, createCard);
+photoCollection();
 
 //Функция для проверки максимальной длины строки
 const checkerLengthStr = (str, maxLength) => str.length <= maxLength;
