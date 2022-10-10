@@ -29,6 +29,8 @@ const MESSAGES = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
 
+const likes = (start = 15, end = 200) => Array(end - start + 1).fill().map((_, idx) => start + idx);
+
 const getRandomPositiveInteger = (a, b) => {
   if (a < 0 || b < 0) {
     return NaN;
@@ -45,8 +47,7 @@ const AVATAR = Array.from({length: AVATAR_NUMBER}, () => `img/avatar-${getRandom
 
 const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0, elements.length - 1)];
 
-
-function createRandomIdFromRangeGenerator (min, max) {
+const createRandomIdFromRangeGenerator = (min, max) => {
   const previousValues = [];
 
   return function () {
@@ -61,9 +62,9 @@ function createRandomIdFromRangeGenerator (min, max) {
     previousValues.push(currentValue);
     return currentValue;
   };
-}
+};
 
-function createRandomUrlFromRangeGenerator (min, max) {
+const createRandomUrlFromRangeGenerator = (min, max) => {
   const previousValues = [];
 
   return function () {
@@ -78,16 +79,11 @@ function createRandomUrlFromRangeGenerator (min, max) {
     previousValues.push(currentValue);
     return `photos/${currentValue}.jpg`;
   };
-}
+};
+
 const getPhotoId = createRandomIdFromRangeGenerator(1, 25);
 const getCommentId = createRandomIdFromRangeGenerator(1, 200);
-const getUrl = createRandomUrlFromRangeGenerator(1,25);
-
-function rangeLikes(start, end) {
-  return Array(end - start + 1).fill().map((_, idx) => start + idx);
-}
-
-const LIKES = rangeLikes(15, 200);
+const getUrl = createRandomUrlFromRangeGenerator(1, 25);
 
 const getRandomComment = () => ({
   id: getCommentId(),
@@ -100,7 +96,7 @@ const createCard = () => ({
   id: getPhotoId(),
   url: getUrl(),
   description: getRandomArrayElement(DESCRIPTIONS),
-  likes: getRandomArrayElement(LIKES),
+  likes: getRandomArrayElement(likes()),
   comments: getRandomComment ()
 });
 
