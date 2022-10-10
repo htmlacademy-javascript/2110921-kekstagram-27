@@ -1,6 +1,11 @@
 const PHOTOS_NUMBER = 25;
 const AVATAR_NUMBER = 6;
 
+const likes = {
+  start: 15,
+  end: 200,
+};
+
 const NAMES = [
   'Иван',
   'Мария',
@@ -29,7 +34,7 @@ const MESSAGES = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
 
-const likes = (start = 15, end = 200) => Array(end - start + 1).fill().map((_, idx) => start + idx);
+const rangeLikes = (start, end) => Array(end - start + 1).fill().map((_, idx) => start + idx);
 
 const getRandomPositiveInteger = (a, b) => {
   if (a < 0 || b < 0) {
@@ -96,7 +101,7 @@ const createCard = () => ({
   id: getPhotoId(),
   url: getUrl(),
   description: getRandomArrayElement(DESCRIPTIONS),
-  likes: getRandomArrayElement(likes()),
+  likes: getRandomArrayElement(rangeLikes(likes.start, likes.end)),
   comments: getRandomComment ()
 });
 
