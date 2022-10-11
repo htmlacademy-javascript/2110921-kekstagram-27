@@ -1,7 +1,11 @@
-import {getRandomArrayElement} from './util.js';
-import {getRandomPositiveInteger} from './util.js';
-import {createRandomIdFromRangeGenerator} from './util.js';
-import {createRandomUrlFromRangeGenerator} from './util.js';
+import {
+  getRandomArrayElement,
+  getRandomPositiveInteger,
+  createRandomIdFromRangeGenerator,
+  createRandomUrlFromRangeGenerator,
+  rangeLikes,
+} from './util.js';
+
 
 const PHOTOS_NUMBER = 25;
 const AVATAR_NUMBER = 6;
@@ -38,8 +42,6 @@ const MESSAGES = [
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
-
-const rangeLikes = (start, end) => Array(end - start + 1).fill().map((_, idx) => start + idx);
 
 const AVATAR = Array.from({length: AVATAR_NUMBER}, () => `img/avatar-${getRandomPositiveInteger(1, 6)}.svg`);
 

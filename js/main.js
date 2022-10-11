@@ -1,4 +1,3 @@
-import './data.js';
 import {CreateCardCollection} from './data.js';
 
 // eslint-disable-next-line no-console

@@ -45,6 +45,8 @@ const createRandomUrlFromRangeGenerator = (min, max) => {
   };
 };
 
+const rangeLikes = (start, end) => Array(end - start + 1).fill().map((_, idx) => start + idx);
+
 const checkerLengthStr = (str, maxLength) => str.length <= maxLength;
 
-export {getRandomArrayElement, createRandomIdFromRangeGenerator, createRandomUrlFromRangeGenerator, checkerLengthStr};
+export {getRandomArrayElement, createRandomIdFromRangeGenerator, createRandomUrlFromRangeGenerator, checkerLengthStr, rangeLikes};
