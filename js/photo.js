@@ -11,7 +11,7 @@ similarCards.forEach(({url, likes, comments}) => {
   const cardElement = similarCardTemplate.cloneNode(true);
   cardElement.querySelector('img').src = url;
   cardElement.querySelector('.picture__likes').textContent = likes;
-  cardElement.querySelector('.picture__comments').textContent = comments;
+  cardElement.querySelector('.picture__comments').textContent = comments.id;
   userPictureList.append(cardElement);
 });
 
