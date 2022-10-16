@@ -61,7 +61,7 @@ const createCard = () => ({
   url: getUrl(),
   description: getRandomArrayElement(DESCRIPTIONS),
   likes: getRandomArrayElement(rangeLikes(likes.start, likes.end)),
-  comments: getRandomComment (),
+  comments: Array.from({ length: 2 }, getRandomComment),
 });
 
 const CreateCardCollection = () => Array.from({length: PHOTOS_NUMBER}, createCard);
