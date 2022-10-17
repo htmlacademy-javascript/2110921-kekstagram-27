@@ -28,9 +28,13 @@ const makeBigPicture = ({url, likes, comments, description}) => {
   commentsCounter.textContent = comments.length;
   makeSocialCommentItem(comments);
   socialCaption.textContent = description;
-  document.body.addEventListener('keydown', onEscClose);
 };
 
+const onEscClose = (evt) => {
+  if (evt.keyCode === 27) {
+    bigPictureElement.classList.add('hidden');
+  }
+};
 
 const openCard = (card) => {
   bigPictureElement.classList.remove('hidden');
@@ -39,6 +43,7 @@ const openCard = (card) => {
   body.classList.add('modal-open');
 
   makeBigPicture(card);
+  document.body.addEventListener('keydown', onEscClose);
 };
 
 const closeCard = () => {
@@ -52,17 +57,5 @@ const closeCard = () => {
 closePicture.addEventListener('click',() => {
   closeCard ();
 });
-
-// document.addEventListener('keydown', (evt) => {
-//   if(evt.keyCode === 27) {
-//     closeCard ();
-//   }
-// });
-
-const onEscClose = (evt) => {
-  if (evt.keyCode === 27) {
-    closeCard ();
-  }
-};
 
 export {openCard};
