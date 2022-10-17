@@ -1,3 +1,5 @@
+const ESC_KEY = 27;
+
 const body = document.querySelector('body');
 const bigPictureElement = document.querySelector('.big-picture');
 const previewPhoto = bigPictureElement.querySelector('.big-picture__img');
@@ -31,8 +33,10 @@ const makeBigPicture = ({url, likes, comments, description}) => {
 };
 
 const onEscClose = (evt) => {
-  if (evt.keyCode === 27) {
+  if (evt.keyCode === ESC_KEY) {
     bigPictureElement.classList.add('hidden');
+    document.body.removeEventListener('keydown', onEscClose);
+    socialCommentList.innerHTML = '';
   }
 };
 

@@ -1,5 +1,5 @@
 import {CreateCardCollection} from './data.js';
-import {openCard} from './fullPhoto.js';
+import {openCard} from './full-photo.js';
 
 const userPictureList = document.querySelector('.pictures');
 const similarCardTemplate = document.querySelector('#picture').content.querySelector('a');
