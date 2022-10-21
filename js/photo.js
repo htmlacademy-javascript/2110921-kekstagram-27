@@ -6,6 +6,7 @@ const similarCardTemplate = document.querySelector('#picture').content.querySele
 
 const similarCards = CreateCardCollection();
 
+
 const pictureListFragment = document.createDocumentFragment();
 
 similarCards.forEach((card) => {
@@ -19,3 +20,4 @@ similarCards.forEach((card) => {
 });
 
 userPictureList.append(pictureListFragment);
+
