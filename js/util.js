@@ -49,5 +49,11 @@ const rangeLikes = (start, end) => Array(end - start + 1).fill().map((_, idx) =>
 
 const checkerLengthStr = (str, maxLength) => str.length <= maxLength;
 
+const countSameValue = (array, value) => {
+  let count = 0;
+  array.forEach((element) => (element === value && count++));
+  return count;
+};
 
-export {getRandomArrayElement, getRandomPositiveInteger, createRandomIdFromRangeGenerator, createRandomUrlFromRangeGenerator, checkerLengthStr, rangeLikes};
+
+export {getRandomArrayElement, getRandomPositiveInteger, createRandomIdFromRangeGenerator, createRandomUrlFromRangeGenerator, checkerLengthStr, rangeLikes, countSameValue};

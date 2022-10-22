@@ -34,11 +34,19 @@ const makeBigPicture = ({url, likes, comments, description}) => {
 
 const onEscClose = (evt) => {
   if (evt.keyCode === ESC_KEY) {
-    bigPictureElement.classList.add('hidden');
-    document.body.removeEventListener('keydown', onEscClose);
-    socialCommentList.innerHTML = '';
+    evt.preventDefault();
+    closeCard();
   }
 };
+
+function closeCard() {
+  bigPictureElement.classList.add('hidden');
+  socialCommentsCounter.classList.remove('hidden');
+  loadButton.classList.remove('hidden');
+  body.classList.remove('modal-open');
+  socialCommentList.innerHTML = '';
+  document.body.removeEventListener('keydown', onEscClose);
+}
 
 const openCard = (card) => {
   bigPictureElement.classList.remove('hidden');
@@ -50,16 +58,8 @@ const openCard = (card) => {
   document.body.addEventListener('keydown', onEscClose);
 };
 
-const closeCard = () => {
-  bigPictureElement.classList.add('hidden');
-  socialCommentsCounter.classList.remove('hidden');
-  loadButton.classList.remove('hidden');
-  body.classList.remove('modal-open');
-  socialCommentList.innerHTML = '';
-};
-
 closePicture.addEventListener('click',() => {
   closeCard ();
 });
 
-export {openCard};
+export {openCard, ESC_KEY};
