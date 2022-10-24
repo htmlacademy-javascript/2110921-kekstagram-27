@@ -57,4 +57,4 @@ form.addEventListener('submit', (evt) => {
   evt.target.reset();
 });
 
-export { pristine, form, formHashtag, formComment };
+export {pristine, form, formHashtag, formComment};

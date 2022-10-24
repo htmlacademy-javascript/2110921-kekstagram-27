@@ -13,7 +13,6 @@ const onEscCloseModal = (evt) => {
   }
 };
 
-
 const openUserModal = () => {
   imageEditor.classList.remove('hidden');
   body.classList.add('modal-open');

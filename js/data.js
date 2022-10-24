@@ -9,6 +9,8 @@ import {
 
 const PHOTOS_NUMBER = 25;
 const AVATAR_NUMBER = 6;
+const COMMENT_COUNT_MIN = 2;
+const COMMENT_COUNT_MAX = 15;
 
 const likes = {
   start: 15,
@@ -61,7 +63,7 @@ const createCard = () => ({
   url: getUrl(),
   description: getRandomArrayElement(DESCRIPTIONS),
   likes: getRandomArrayElement(rangeLikes(likes.start, likes.end)),
-  comments: Array.from({ length: 2 }, getRandomComment),
+  comments: Array.from({ length: getRandomPositiveInteger(COMMENT_COUNT_MIN, COMMENT_COUNT_MAX)}, getRandomComment),
 });
 
 const CreateCardCollection = () => Array.from({length: PHOTOS_NUMBER}, createCard);
