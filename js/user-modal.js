@@ -1,5 +1,6 @@
 import { ESC_KEY } from './full-photo.js';
 import { pristine, form, formHashtag, formComment } from './validate-form.js';
+import { scale, removeListenersButtons } from './scale-image.js';
 
 const body = document.querySelector('body');
 const imageEditor = document.querySelector('.img-upload__overlay');
@@ -14,6 +15,7 @@ const onEscCloseModal = (evt) => {
 };
 
 const openUserModal = () => {
+  scale();
   imageEditor.classList.remove('hidden');
   body.classList.add('modal-open');
   document.addEventListener('keydown', onEscCloseModal);
@@ -26,6 +28,7 @@ function closeUserModal() {
   pristine.reset();//пока просто добавила, чтобы убиралось сообщение от валидатора при повторном открытии редактора
   document.removeEventListener('keydown', onEscCloseModal);
   closeEditor.removeEventListener('click', closeUserModal);
+  removeListenersButtons();
 }
 
 uploadFile.addEventListener('change', () => {
