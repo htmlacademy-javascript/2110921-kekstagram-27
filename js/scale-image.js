@@ -43,4 +43,4 @@ const scale = () => {
   setListenersButtons();
 };
 
-export {scale, removeListenersButtons};
+export {scale, removeListenersButtons, imagePreview};
