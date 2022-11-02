@@ -42,7 +42,7 @@ pristine.addValidator(formHashtag, (value) => {
 }, 'Один и тот же хэш-тег не может быть использован дважды.');
 
 pristine.addValidator(formComment, (comment) => {
-  if (comment.length === 0) {
+  if (comment.length < MAX_DESCRIPTION_LENGTH) {
     return true;
   }
   checkerLengthStr(comment, MAX_DESCRIPTION_LENGTH);
@@ -52,9 +52,12 @@ pristine.addValidator(formComment, (comment) => {
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();
 
-  pristine.validate();
-
-  evt.target.reset();
+  const isValid = pristine.validate();
+  if (isValid) {
+    console.log('Можно отправлять');
+  } else {
+    console.log('Форма невалидна');
+  }
 });
 
 export {pristine, form, formHashtag, formComment};
