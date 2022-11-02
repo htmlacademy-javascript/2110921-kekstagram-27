@@ -68,4 +68,4 @@ const createCard = () => ({
 
 const CreateCardCollection = () => Array.from({length: PHOTOS_NUMBER}, createCard);
 
-export {CreateCardCollection, createCard};
+export {CreateCardCollection};
