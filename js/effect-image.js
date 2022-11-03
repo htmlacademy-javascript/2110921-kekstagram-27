@@ -10,6 +10,7 @@ const sliderField = document.querySelector('.effect-level');
 const sliderElement = document.querySelector('.effect-level__slider');
 const valueElement = document.querySelector('.effect-level__value');
 const effectsList = document.querySelector('.effects__list');
+const imgUploadForm = document.querySelector('.img-upload__form');
 
 let currentEffect = document.querySelector('.effects__list input:checked').value;
 
@@ -55,6 +56,11 @@ const resetEffect = () => {
   imagePreview.classList = '';
   currentEffect = 'none';
   imagePreview.classList.add(`effects__preview--${currentEffect}`);
+};
+
+const resetForm = () => {
+  resetEffect();
+  imgUploadForm.reset();
 };
 
 sliderElement.noUiSlider.on('update', () => {
@@ -147,4 +153,4 @@ effectsList.addEventListener('change', (evt) => {
   }
 });
 
-export {resetEffect};
+export {resetForm};
