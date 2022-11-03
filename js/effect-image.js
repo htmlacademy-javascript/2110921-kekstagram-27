@@ -37,6 +37,26 @@ noUiSlider.create(sliderElement, {
 });
 
 
+const resetSlider = () => {
+  sliderElement.noUiSlider.updateOptions({
+    range: {
+      min: 0,
+      max: 100,
+    },
+    start: 100,
+    step: 1,
+  });
+};
+
+const resetEffect = () => {
+  resetSlider();
+  imagePreview.style.filter = 'none';
+  sliderField.style.display = 'none';
+  imagePreview.classList = '';
+  currentEffect = 'none';
+  imagePreview.classList.add(`effects__preview--${currentEffect}`);
+};
+
 sliderElement.noUiSlider.on('update', () => {
   valueElement.value = sliderElement.noUiSlider.get();
 });
@@ -126,3 +146,5 @@ effectsList.addEventListener('change', (evt) => {
     });
   }
 });
+
+export {resetEffect};

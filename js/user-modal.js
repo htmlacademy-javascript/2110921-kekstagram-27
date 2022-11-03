@@ -1,11 +1,14 @@
 import {ESC_KEY} from './full-photo.js';
 import {form, formHashtag, formComment} from './validate-form.js';
 import {scale, removeListenersButtons} from './scale-image.js';
+import {resetEffect} from './effect-image.js';
 
 const body = document.querySelector('body');
 const imageEditor = document.querySelector('.img-upload__overlay');
 const uploadFile = document.querySelector('#upload-file');
 const closeEditor = document.querySelector('#upload-cancel');
+const imgUploadForm = document.querySelector('.img-upload__form');
+
 
 const onEscCloseModal = (evt) => {
   if (evt.keyCode === ESC_KEY) {
@@ -28,6 +31,8 @@ function closeUserModal() {
   document.removeEventListener('keydown', onEscCloseModal);
   closeEditor.removeEventListener('click', closeUserModal);
   removeListenersButtons();
+  imgUploadForm.reset();
+  resetEffect();
 }
 
 uploadFile.addEventListener('change', () => {
@@ -40,3 +45,4 @@ form.addEventListener('keydown', (evt) => {
   }
 });
 
+export {openUserModal, closeUserModal};
