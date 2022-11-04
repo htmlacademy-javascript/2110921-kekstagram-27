@@ -1,4 +1,7 @@
 import {checkerLengthStr, countSameValue} from './util.js';
+import {sendData} from './api-server.js';
+import {resetForm} from './effect-image.js';
+import {getSuccessMessage, getErrorMessage} from './popup-message.js';
 
 const HASHTAG_RULE = /^#[a-zа-яё0-9]{1,19}$/i;
 const HASTAG_MAX_COUNT = 5;
@@ -7,6 +10,7 @@ const MAX_DESCRIPTION_LENGTH = 140;
 const form = document.querySelector('#upload-select-image');
 const formHashtag = form.querySelector('.text__hashtags');
 const formComment = form.querySelector('.text__description');
+const submitButton = document.querySelector('#upload-submit');
 
 const getHashTagsArray = (value) => value.trim().toLowerCase().split(' ');
 
@@ -42,19 +46,43 @@ pristine.addValidator(formHashtag, (value) => {
 }, 'Один и тот же хэш-тег не может быть использован дважды.');
 
 pristine.addValidator(formComment, (comment) => {
-  if (comment.length === 0) {
+  if (comment.length < MAX_DESCRIPTION_LENGTH) {
     return true;
   }
   checkerLengthStr(comment, MAX_DESCRIPTION_LENGTH);
 }, 'Длина комментария не может составлять больше 140 символов.');
 
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = 'Сохраняю...';
+};
 
-form.addEventListener('submit', (evt) => {
-  evt.preventDefault();
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = 'Сохранить';
+};
 
-  pristine.validate();
+const setUserFormSubmit = (onSuccess) => {
+  form.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    const isValid = pristine.validate();
+    if (isValid) {
+      blockSubmitButton();
+      sendData(
+        () => {
+          onSuccess();
+          unblockSubmitButton();
+          resetForm();
+          getSuccessMessage();
+        },
+        () => {
+          getErrorMessage();
+          unblockSubmitButton();
+        },
+        new FormData(evt.target),
+      );
+    }
+  });
+};
 
-  evt.target.reset();
-});
-
-export {pristine, form, formHashtag, formComment};
+export {pristine, form, formHashtag, formComment, setUserFormSubmit};

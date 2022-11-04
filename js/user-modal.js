@@ -1,14 +1,17 @@
-import { ESC_KEY } from './full-photo.js';
-import { pristine, form, formHashtag, formComment } from './validate-form.js';
-import { scale, removeListenersButtons } from './scale-image.js';
+import {ESC_KEY} from './full-photo.js';
+import {form, formHashtag, formComment} from './validate-form.js';
+import {scale, removeListenersButtons} from './scale-image.js';
+import {resetForm} from './effect-image.js';
 
 const body = document.querySelector('body');
 const imageEditor = document.querySelector('.img-upload__overlay');
 const uploadFile = document.querySelector('#upload-file');
 const closeEditor = document.querySelector('#upload-cancel');
 
+
 const onEscCloseModal = (evt) => {
-  if (evt.keyCode === ESC_KEY) {
+  const errorElement = document.querySelector('.error');
+  if (evt.keyCode === ESC_KEY && !errorElement) {
     evt.preventDefault();
     closeUserModal();
   }
@@ -25,10 +28,10 @@ const openUserModal = () => {
 function closeUserModal() {
   imageEditor.classList.add('hidden');
   body.classList.remove('modal-open');
-  pristine.reset();//пока просто добавила, чтобы убиралось сообщение от валидатора при повторном открытии редактора
   document.removeEventListener('keydown', onEscCloseModal);
   closeEditor.removeEventListener('click', closeUserModal);
   removeListenersButtons();
+  resetForm();
 }
 
 uploadFile.addEventListener('change', () => {
@@ -41,3 +44,4 @@ form.addEventListener('keydown', (evt) => {
   }
 });
 
+export {openUserModal, closeUserModal};

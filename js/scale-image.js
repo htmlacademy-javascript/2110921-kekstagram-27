@@ -9,17 +9,17 @@ const increaseButton = document.querySelector('.scale__control--bigger');
 const imagePreview = document.querySelector('.img-upload__preview img');
 
 const scaleImage = () => {
-  imagePreview.style.transform = `scale(${parseInt(controlField.value, 10) / 100})`;
+  imagePreview.style.transform = `scale(${parseInt(controlField.value, 10) / DEFAULT_SCALE_VALUE})`;
 };
 
-const increaseImage = () => {
+const onIncreaseButton = () => {
   if (parseInt(controlField.value, 10) !== MAX_SCALE_VALUE ) {
     controlField.value = `${parseInt(controlField.value, 10) + SCALE_STEP}%`;
     scaleImage();
   }
 };
 
-const decreaseImage = () => {
+const onDecreaseButton = () => {
   if (parseInt(controlField.value, 10) !== MIN_SCALE_VALUE) {
     controlField.value = `${parseInt(controlField.value, 10) - SCALE_STEP}%`;
     scaleImage();
@@ -27,13 +27,13 @@ const decreaseImage = () => {
 };
 
 const setListenersButtons = () => {
-  decreaseButton.addEventListener('click', decreaseImage);
-  increaseButton.addEventListener('click', increaseImage);
+  decreaseButton.addEventListener('click', onDecreaseButton);
+  increaseButton.addEventListener('click', onIncreaseButton);
 };
 
 const removeListenersButtons = () => {
-  decreaseButton.removeEventListener('click', decreaseImage);
-  increaseButton.removeEventListener('click', increaseImage);
+  decreaseButton.removeEventListener('click', onDecreaseButton);
+  increaseButton.removeEventListener('click', onIncreaseButton);
 };
 
 

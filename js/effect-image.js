@@ -10,6 +10,7 @@ const sliderField = document.querySelector('.effect-level');
 const sliderElement = document.querySelector('.effect-level__slider');
 const valueElement = document.querySelector('.effect-level__value');
 const effectsList = document.querySelector('.effects__list');
+const imgUploadForm = document.querySelector('.img-upload__form');
 
 let currentEffect = document.querySelector('.effects__list input:checked').value;
 
@@ -36,6 +37,31 @@ noUiSlider.create(sliderElement, {
   }
 });
 
+
+const resetSlider = () => {
+  sliderElement.noUiSlider.updateOptions({
+    range: {
+      min: 0,
+      max: 100,
+    },
+    start: 100,
+    step: 1,
+  });
+};
+
+const resetEffect = () => {
+  resetSlider();
+  imagePreview.style.filter = 'none';
+  sliderField.style.display = 'none';
+  imagePreview.classList = '';
+  currentEffect = 'none';
+  imagePreview.classList.add(`effects__preview--${currentEffect}`);
+};
+
+const resetForm = () => {
+  resetEffect();
+  imgUploadForm.reset();
+};
 
 sliderElement.noUiSlider.on('update', () => {
   valueElement.value = sliderElement.noUiSlider.get();
@@ -126,3 +152,5 @@ effectsList.addEventListener('change', (evt) => {
     });
   }
 });
+
+export {resetForm};
