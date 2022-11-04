@@ -1,5 +1,8 @@
+
+const LINK = 'https://27.javascript.pages.academy/kekstagram';
+
 const getData = (onSuccess, onError) => {
-  fetch('https://27.javascript.pages.academy/kekstagram/data')
+  fetch(`${LINK}/data`)
     .then((response) => response.json())
     .then((cards) => {
       onSuccess(cards);
@@ -11,7 +14,7 @@ const getData = (onSuccess, onError) => {
 
 const sendData = (onSuccess, onFail, body) => {
   fetch(
-    'https://27.javascript.pages.academy/kekstagram',
+    LINK,
     {
       method: 'POST',
       body,
