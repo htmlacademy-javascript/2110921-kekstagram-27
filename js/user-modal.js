@@ -10,7 +10,8 @@ const closeEditor = document.querySelector('#upload-cancel');
 
 
 const onEscCloseModal = (evt) => {
-  if (evt.keyCode === ESC_KEY) {
+  const errorElement = document.querySelector('.error');
+  if (evt.keyCode === ESC_KEY && !errorElement) {
     evt.preventDefault();
     closeUserModal();
   }
