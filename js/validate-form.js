@@ -1,6 +1,7 @@
 import {checkerLengthStr, countSameValue} from './util.js';
 import {sendData} from './api-server.js';
 import {resetForm} from './effect-image.js';
+import {getSuccessMessage} from './popup-message.js';
 
 const HASHTAG_RULE = /^#[a-zа-яё0-9]{1,19}$/i;
 const HASTAG_MAX_COUNT = 5;
@@ -72,6 +73,7 @@ const setUserFormSubmit = (onSuccess) => {
           onSuccess();
           unblockSubmitButton();
           resetForm();
+          getSuccessMessage();
           console.log('success');
         },
         () => {
