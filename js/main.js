@@ -4,9 +4,12 @@ import './effect-image.js';
 import {getData} from './api-server.js';
 import {renderSimilarCards} from './photo.js';
 import {showAlert} from './util.js';
+import {changeFilter} from './sorting.js';
+
 
 const onSuccessLoadData = (cards) => {
   renderSimilarCards(cards);
+  changeFilter(cards);
 };
 
 const onErrorLoadData = () => {
@@ -14,5 +17,6 @@ const onErrorLoadData = () => {
 };
 
 getData(onSuccessLoadData, onErrorLoadData);
+
 
 setUserFormSubmit(closeUserModal);

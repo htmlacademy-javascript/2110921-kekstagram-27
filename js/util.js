@@ -29,4 +29,28 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
-export {checkerLengthStr, countSameValue, showAlert};
+const sortByComments = (a, b) => b.comments.length - a.comments.length;
+
+
+const shuffle = (array) => {
+  let currentIndex = array.length, randomIndex;
+
+  while (currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+
+  return array;
+};
+
+function debounce (callback, timeoutDelay) {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+}
+
+export {checkerLengthStr, countSameValue, showAlert, sortByComments, shuffle, debounce};

@@ -2,10 +2,11 @@ import {openCard} from './full-photo.js';
 
 const userPictureList = document.querySelector('.pictures');
 const similarCardTemplate = document.querySelector('#picture').content.querySelector('a');
-
+const imgFilters = document.querySelector('.img-filters');
 const pictureListFragment = document.createDocumentFragment();
 
 const renderSimilarCards = (similarCards) => {
+  imgFilters.classList.remove('img-filters--inactive');
   similarCards.forEach((card) => {
     const cardElement = similarCardTemplate.cloneNode(true);
     cardElement.querySelector('img').src = card.url;
@@ -15,7 +16,7 @@ const renderSimilarCards = (similarCards) => {
 
     cardElement.addEventListener('click', () => openCard(card));
   });
+  userPictureList.append(pictureListFragment);
 };
-userPictureList.append(pictureListFragment);
 
 export {renderSimilarCards};
