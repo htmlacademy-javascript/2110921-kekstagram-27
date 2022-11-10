@@ -60,6 +60,7 @@ const resetEffect = () => {
 
 const resetForm = () => {
   resetEffect();
+  imagePreview.src = 'img/upload-default-image.jpg';
   imgUploadForm.reset();
 };
 

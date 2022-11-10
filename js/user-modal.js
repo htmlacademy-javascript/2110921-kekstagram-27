@@ -1,7 +1,9 @@
 import {ESC_KEY} from './full-photo.js';
 import {form, formHashtag, formComment} from './validate-form.js';
-import {scale, removeListenersButtons} from './scale-image.js';
+import {scale, imagePreview, removeListenersButtons} from './scale-image.js';
 import {resetForm} from './effect-image.js';
+
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
 const body = document.querySelector('body');
 const imageEditor = document.querySelector('.img-upload__overlay');
@@ -35,6 +37,13 @@ function closeUserModal() {
 }
 
 uploadFile.addEventListener('change', () => {
+  const file = uploadFile.files[0];
+  const fileName = file.name.toLowerCase();
+  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+
+  if (matches) {
+    imagePreview.src = URL.createObjectURL(file);
+  }
   openUserModal();
 });
 
