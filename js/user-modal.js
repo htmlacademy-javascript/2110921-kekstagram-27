@@ -11,7 +11,7 @@ const uploadFile = document.querySelector('#upload-file');
 const closeEditor = document.querySelector('#upload-cancel');
 
 
-const onEscCloseModal = (evt) => {
+const onEscCloseModalKeydown = (evt) => {
   const errorElement = document.querySelector('.error');
   if (evt.keyCode === ESC_KEY && !errorElement) {
     evt.preventDefault();
@@ -23,14 +23,16 @@ const openUserModal = () => {
   scale();
   imageEditor.classList.remove('hidden');
   body.classList.add('modal-open');
-  document.addEventListener('keydown', onEscCloseModal);
+  document.addEventListener('keydown', onEscCloseModalKeydown);
+  form.addEventListener('keydown', onEscInputKeydown);
   closeEditor.addEventListener('click', closeUserModal);
 };
 
 function closeUserModal() {
   imageEditor.classList.add('hidden');
   body.classList.remove('modal-open');
-  document.removeEventListener('keydown', onEscCloseModal);
+  document.removeEventListener('keydown', onEscCloseModalKeydown);
+  form.removeEventListener('keydown', onEscInputKeydown);
   closeEditor.removeEventListener('click', closeUserModal);
   removeListenersButtons();
   resetForm();
@@ -47,10 +49,10 @@ uploadFile.addEventListener('change', () => {
   openUserModal();
 });
 
-form.addEventListener('keydown', (evt) => {
+function onEscInputKeydown(evt) {
   if (document.activeElement === formHashtag || document.activeElement === formComment) {
     evt.stopPropagation();
   }
-});
+}
 
 export {openUserModal, closeUserModal};

@@ -13,7 +13,7 @@ const errorMessageArea = document.querySelector('.error__inner');
 
 //сообщение об успешной отправке и действия с ним
 
-const onEscCloseSuccessMessage = (evt) => {
+const onEscCloseSuccessMessageKeydown = (evt) => {
   if (evt.keyCode === ESC_KEY) {
     evt.preventDefault();
     closeSuccessMessage();
@@ -29,14 +29,14 @@ const onOutsideSuccessClick = (evt) => {
 
 const getSuccessMessage = () => {
   document.body.appendChild(successMessage);
-  document.addEventListener('keydown', onEscCloseSuccessMessage);
+  document.addEventListener('keydown', onEscCloseSuccessMessageKeydown);
   document.addEventListener('click', onOutsideSuccessClick);
   successCloseButton.addEventListener('click', closeSuccessMessage);
 };
 
 function closeSuccessMessage () {
   document.body.removeChild(successMessage);
-  document.removeEventListener('keydown', onEscCloseSuccessMessage);
+  document.removeEventListener('keydown', onEscCloseSuccessMessageKeydown);
   document.removeEventListener('click', onOutsideSuccessClick);
   successCloseButton.removeEventListener('click', closeSuccessMessage);
 }

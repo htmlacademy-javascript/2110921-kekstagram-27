@@ -1,6 +1,6 @@
 const ALERT_SHOW_TIME = 5000;
 
-const checkerLengthStr = (str, maxLength) => str.length <= maxLength;
+const checkLengthStr = (str, maxLength) => str.length <= maxLength;
 
 const countSameValue = (array, value) => {
   let count = 0;
@@ -53,4 +53,4 @@ function debounce (callback, timeoutDelay) {
   };
 }
 
-export {checkerLengthStr, countSameValue, showAlert, sortByComments, shuffle, debounce};
+export {checkLengthStr, countSameValue, showAlert, sortByComments, shuffle, debounce};
