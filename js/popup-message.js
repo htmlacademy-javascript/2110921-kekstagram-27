@@ -43,7 +43,7 @@ function closeSuccessMessage () {
 
 //сообщение об ошибке и действия с ним
 
-const onEscCloseErrorMessage = (evt) => {
+const onEscCloseErrorMessageKeydown = (evt) => {
   if (evt.keyCode === ESC_KEY) {
     evt.preventDefault();
     closeErrorMessage();
@@ -60,14 +60,14 @@ const onOutsideErrorClick = (evt) => {
 const getErrorMessage = () => {
   document.body.appendChild(errorMessage);
   document.addEventListener('click', onOutsideErrorClick);
-  document.addEventListener('keydown', onEscCloseErrorMessage);
+  document.addEventListener('keydown', onEscCloseErrorMessageKeydown);
   errorCloseButton.addEventListener('click', closeErrorMessage);
 };
 
 function closeErrorMessage () {
   document.body.removeChild(errorMessage);
   document.removeEventListener('click', onOutsideErrorClick);
-  document.removeEventListener('keydown', onEscCloseErrorMessage);
+  document.removeEventListener('keydown', onEscCloseErrorMessageKeydown);
   errorCloseButton.removeEventListener('click', closeErrorMessage);
 }
 
