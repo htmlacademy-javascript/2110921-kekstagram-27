@@ -33,11 +33,7 @@ const renderComments = () => {
 
   socialCommentsCounter.innerHTML = `${loadedCommtent.length} из <span class="comments-count">${usersComments.length}</span> комментариев`;
 
-  if(loadedCommtent.length === usersComments.length) {
-    loadButton.classList.add('hidden');
-  } else {
-    loadButton.classList.remove('hidden');
-  }
+  loadButton.classList.toggle('hidden', loadedCommtent.length === usersComments.length);
 
 };
 
@@ -53,11 +49,7 @@ const makeBigPicture = (({url, likes, comments, description}) => {
   socialCaption.textContent = description;
 
   usersComments = comments;
-  if (comments.length < COUNT_VIEW_COMMENTS) {
-    amount = comments.length;
-  } else {
-    amount = COUNT_VIEW_COMMENTS;
-  }
+  amount = comments.length < COUNT_VIEW_COMMENTS ? comments.length : COUNT_VIEW_COMMENTS;
   renderComments();
   loadButton.addEventListener('click', commentsLoaderOnClick);
 });

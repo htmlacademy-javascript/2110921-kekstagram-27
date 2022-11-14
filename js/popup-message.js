@@ -13,7 +13,7 @@ const errorMessageArea = document.querySelector('.error__inner');
 
 //сообщение об успешной отправке и действия с ним
 
-const onEscCloseSuccessMessage = (evt) => {
+const onEscCloseSuccessMessageKeydown = (evt) => {
   if (evt.keyCode === ESC_KEY) {
     evt.preventDefault();
     closeSuccessMessage();
@@ -29,21 +29,21 @@ const onOutsideSuccessClick = (evt) => {
 
 const getSuccessMessage = () => {
   document.body.appendChild(successMessage);
-  document.addEventListener('keydown', onEscCloseSuccessMessage);
+  document.addEventListener('keydown', onEscCloseSuccessMessageKeydown);
   document.addEventListener('click', onOutsideSuccessClick);
   successCloseButton.addEventListener('click', closeSuccessMessage);
 };
 
 function closeSuccessMessage () {
   document.body.removeChild(successMessage);
-  document.removeEventListener('keydown', onEscCloseSuccessMessage);
+  document.removeEventListener('keydown', onEscCloseSuccessMessageKeydown);
   document.removeEventListener('click', onOutsideSuccessClick);
   successCloseButton.removeEventListener('click', closeSuccessMessage);
 }
 
 //сообщение об ошибке и действия с ним
 
-const onEscCloseErrorMessage = (evt) => {
+const onEscCloseErrorMessageKeydown = (evt) => {
   if (evt.keyCode === ESC_KEY) {
     evt.preventDefault();
     closeErrorMessage();
@@ -60,14 +60,14 @@ const onOutsideErrorClick = (evt) => {
 const getErrorMessage = () => {
   document.body.appendChild(errorMessage);
   document.addEventListener('click', onOutsideErrorClick);
-  document.addEventListener('keydown', onEscCloseErrorMessage);
+  document.addEventListener('keydown', onEscCloseErrorMessageKeydown);
   errorCloseButton.addEventListener('click', closeErrorMessage);
 };
 
 function closeErrorMessage () {
   document.body.removeChild(errorMessage);
   document.removeEventListener('click', onOutsideErrorClick);
-  document.removeEventListener('keydown', onEscCloseErrorMessage);
+  document.removeEventListener('keydown', onEscCloseErrorMessageKeydown);
   errorCloseButton.removeEventListener('click', closeErrorMessage);
 }
 

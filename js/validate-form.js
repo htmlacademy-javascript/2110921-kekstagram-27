@@ -1,4 +1,4 @@
-import {checkerLengthStr, countSameValue} from './util.js';
+import {checkLengthStr, countSameValue} from './util.js';
 import {sendData} from './api-server.js';
 import {resetForm} from './effect-image.js';
 import {getSuccessMessage, getErrorMessage} from './popup-message.js';
@@ -49,7 +49,7 @@ pristine.addValidator(formComment, (comment) => {
   if (comment.length < MAX_DESCRIPTION_LENGTH) {
     return true;
   }
-  checkerLengthStr(comment, MAX_DESCRIPTION_LENGTH);
+  checkLengthStr(comment, MAX_DESCRIPTION_LENGTH);
 }, 'Длина комментария не может составлять больше 140 символов.');
 
 const blockSubmitButton = () => {
